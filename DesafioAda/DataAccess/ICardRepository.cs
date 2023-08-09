@@ -1,6 +1,6 @@
 ﻿using DesafioAda.Domain;
 
-namespace DesafioAda.Services.Abstractions;
+namespace DesafioAda.DataAccess;
 
 public interface ICardRepository
 {

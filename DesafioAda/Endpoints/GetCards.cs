@@ -1,5 +1,5 @@
-﻿using DesafioAda.Domain;
-using DesafioAda.Services.Abstractions;
+﻿using DesafioAda.DataAccess;
+using DesafioAda.Domain;
 using FastEndpoints;
 
 namespace DesafioAda.Endpoints;

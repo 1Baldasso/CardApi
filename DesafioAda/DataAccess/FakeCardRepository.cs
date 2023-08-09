@@ -1,7 +1,6 @@
 ﻿using DesafioAda.Domain;
-using DesafioAda.Services.Abstractions;
 
-namespace DesafioAda.Services.Implementations;
+namespace DesafioAda.DataAccess;
 
 public class FakeCardRepository : ICardRepository
 {
@@ -36,13 +35,13 @@ public class FakeCardRepository : ICardRepository
                 Id = Guid.NewGuid(),
                 Titulo = "Card Title " + (i + 1),
                 Conteudo = "Card Content" + (i + 1),
-                Lista = string.Join($",{Environment.NewLine}", 
-                new[] 
-                { 
+                Lista = string.Join($",{Environment.NewLine}",
+                new[]
+                {
                     $"Item 1 Lista {i + 1}",
                     $"Item 2 Lista {i + 1}",
                     $"Item 3 Lista {i + 1}",
-                    $"Item 4 Lista {i + 1}" 
+                    $"Item 4 Lista {i + 1}"
                 })
             };
         }

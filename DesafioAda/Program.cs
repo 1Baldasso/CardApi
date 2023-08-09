@@ -1,6 +1,5 @@
+using DesafioAda.DataAccess;
 using DesafioAda.DependencyInjection;
-using DesafioAda.Services.Abstractions;
-using DesafioAda.Services.Implementations;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
