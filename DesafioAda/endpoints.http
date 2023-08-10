@@ -1,0 +1,61 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+@host = localhost:32770
+@auth_token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2OTE2MjM2NTIsImV4cCI6MTY5MjIyODQ1MiwiaWF0IjoxNjkxNjIzNjUyfQ.mLQgLQp1NIfhYzziWTpzErXQZT7QHeQCOOQCklxHbLw
+@card_id = 9ff3a853-dea5-41aa-b4d8-1aaaa927d2b4
+
+# Por favor, faça uma requisição para o endpoint /token para obter um token de autenticação.
+# Depois, copie o token e cole no campo @auth_token acima.
+
+POST https://{{host}}/token
+Content-Type: application/json
+
+{
+    "login": "letscode",
+    "senha": "lets@123"
+}
+
+###
+
+GET https://{{host}}/Test
+Authorization {{auth_token}}
+
+###
+
+GET https://{{host}}/cards
+Authorization {{auth_token}}
+
+###
+
+GET https://{{host}}/cards/{{card_id}}
+Authorization {{auth_token}}
+
+###
+
+POST https://{{host}}/cards/
+Authorization {{auth_token}}
+Content-Type application/json
+
+{
+    "titulo": "Fazer Compras",
+    "conteudo": "Ir ao Superpao depois da aula comprar pao, presunto, queijo",
+    "lista": "Compras"
+}
+
+###
+
+PUT https://{{host}}/cards/{{card_id}}
+Authorization {{auth_token}}
+Content-Type application/json
+
+{
+    "id": "{{card_id}}",
+    "titulo": "Fazer Tarefa de Casa",
+    "conteudo": "Fazer tarefa de matematica",
+    "lista": "Escola"
+}
+
+###
+
+DELETE https://{{host}}/cards/{{card_id}}
+Authorization {{auth_token}}
