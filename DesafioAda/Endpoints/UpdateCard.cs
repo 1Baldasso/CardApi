@@ -49,7 +49,7 @@ public class UpdateCard : Endpoint<UpdateCardDto, Card>
         }
         catch (EntityNotFoundException)
         {
-            await SendNotFoundAsync();
+            await SendNotFoundAsync(ct);
             return;
         }
 
