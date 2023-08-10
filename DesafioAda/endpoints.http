@@ -1,13 +1,13 @@
 # For more info on HTTP files go to https://aka.ms/vs/httpfile
 
-@host = localhost:32770
-@auth_token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2OTE2MjM2NTIsImV4cCI6MTY5MjIyODQ1MiwiaWF0IjoxNjkxNjIzNjUyfQ.mLQgLQp1NIfhYzziWTpzErXQZT7QHeQCOOQCklxHbLw
+@host = http://localhost:5000
+@auth_token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2OTE2NDAyMzUsImV4cCI6MTY5MjI0NTAzNSwiaWF0IjoxNjkxNjQwMjM1fQ.cRwz6PyEiByGCFyIKNT0Rk3uHH-6_4GL_QmefqyN_vM
 @card_id = 9ff3a853-dea5-41aa-b4d8-1aaaa927d2b4
 
 # Por favor, faça uma requisição para o endpoint /token para obter um token de autenticação.
 # Depois, copie o token e cole no campo @auth_token acima.
 
-POST https://{{host}}/token
+POST {{host}}/token
 Content-Type: application/json
 
 {
@@ -17,22 +17,22 @@ Content-Type: application/json
 
 ###
 
-GET https://{{host}}/Test
+GET {{host}}/Test
 Authorization {{auth_token}}
 
 ###
 
-GET https://{{host}}/cards
+GET {{host}}/cards
 Authorization {{auth_token}}
 
 ###
 
-GET https://{{host}}/cards/{{card_id}}
+GET {{host}}/cards/{{card_id}}
 Authorization {{auth_token}}
 
 ###
 
-POST https://{{host}}/cards/
+POST {{host}}/cards/
 Authorization {{auth_token}}
 Content-Type application/json
 
@@ -44,7 +44,7 @@ Content-Type application/json
 
 ###
 
-PUT https://{{host}}/cards/{{card_id}}
+PUT {{host}}/cards/{{card_id}}
 Authorization {{auth_token}}
 Content-Type application/json
 
@@ -57,5 +57,5 @@ Content-Type application/json
 
 ###
 
-DELETE https://{{host}}/cards/{{card_id}}
+DELETE {{host}}/cards/{{card_id}}
 Authorization {{auth_token}}

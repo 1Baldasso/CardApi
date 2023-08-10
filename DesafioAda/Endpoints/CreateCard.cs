@@ -2,6 +2,7 @@
 using DesafioAda.Domain;
 using DesafioAda.Model;
 using DesafioAda.Processing;
+using DesafioAda.Validators;
 using FastEndpoints;
 using Microsoft.AspNetCore.Authorization;
 
@@ -25,7 +26,7 @@ public class CreateCard : Endpoint<CreateCardDto, Card>
     [EndpointName(nameof(CreateCard))]
     public override async Task HandleAsync(CreateCardDto req, CancellationToken ct)
     {
-        Card card = _repository.CreateCard(new Card
+        Card card = await _repository.CreateCard(new Card
         {
             Id = Guid.NewGuid(),
             Titulo = req.Titulo,

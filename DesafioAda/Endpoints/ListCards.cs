@@ -16,7 +16,7 @@ public class ListCards : EndpointWithoutRequest<IEnumerable<Card>>
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        IEnumerable<Card> cards = _repository.ListCards();
+        IEnumerable<Card> cards = await _repository.GetAllCards();
         await SendOkAsync(cards, ct);
     }
 }

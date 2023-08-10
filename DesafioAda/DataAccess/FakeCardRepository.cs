@@ -4,28 +4,28 @@ namespace DesafioAda.DataAccess;
 
 public class FakeCardRepository : ICardRepository
 {
-    public Card CreateCard(Card card)
+    public Task<Card> CreateCard(Card card)
     {
-        return card;
+        return Task.FromResult(card);
     }
 
-    public void DeleteCard(Guid id)
+    public Task DeleteCard(Guid id)
     {
-        return;
+        return Task.CompletedTask;
     }
 
-    public Card GetCard(Guid id)
+    public Task<Card> GetCard(Guid id)
     {
-        return new Card
+        return Task.FromResult(new Card
         {
             Id = id,
             Titulo = "Placeholder Title",
             Conteudo = "Placeholder Content",
             Lista = "Placeholder List"
-        };
+        });
     }
 
-    public IEnumerable<Card> ListCards()
+    public Task<IEnumerable<Card>> GetAllCards()
     {
         Card[] cards = new Card[4];
         for (int i = 0; i < 4; i++)
@@ -45,11 +45,11 @@ public class FakeCardRepository : ICardRepository
                 })
             };
         }
-        return cards.AsEnumerable();
+        return Task.FromResult(cards.AsEnumerable());
     }
 
-    public Card UpdateCard(Card card)
+    public Task<Card> UpdateCard(Card card)
     {
-        return card;
+        return Task.FromResult(card);
     }
 }

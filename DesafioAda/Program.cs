@@ -8,6 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Net;
 using System.Text;
 using Serilog.Events;
+using Microsoft.EntityFrameworkCore;
+using DesafioAda.Exceptions;
 
 namespace DesafioAda;
 
@@ -30,6 +32,8 @@ public class Program
         builder.Services.AddFastEndpoints();
         builder.Services.AddSerilog(logger);
         builder.Services.SwaggerDocument();
+        builder.Services.AddDbContext<CardContext>(options =>
+                   options.UseInMemoryDatabase("CardInMemoryDb"));
 
         builder.Services.AddCors(options =>
             options.AddDefaultPolicy(policy => 
@@ -42,13 +46,14 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddAuthService(config["JwtSecret"]);
-        builder.Services.AddScoped<ICardRepository, FakeCardRepository>();
+        builder.Services.AddScoped<ICardRepository, CardRepository>();
 
         var app = builder.Build();
 
         app.UseCors();
         app.UseAuthentication();
         app.UseAuthorization();
+        app.UseMiddleware<ExceptionMiddleware>();
 
         app.UseFastEndpoints(x =>
         {

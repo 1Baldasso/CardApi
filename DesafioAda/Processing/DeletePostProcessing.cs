@@ -8,7 +8,7 @@ public class DeleteCardLogger : IPostProcessor<CardByIdDto, IEnumerable<Card>>
 {
     public Task PostProcessAsync(CardByIdDto req, IEnumerable<Card> res, HttpContext ctx, IReadOnlyCollection<ValidationFailure> failures, CancellationToken ct)
     {
-        if (ctx.Response.StatusCode == 204)
+        if (ctx.Response.StatusCode == 200)
         {
             var logger = ctx.Resolve<Serilog.ILogger>();
             var title = ctx.Response.Headers["Deleted-Card-Title"];

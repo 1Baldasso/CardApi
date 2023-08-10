@@ -1,5 +1,6 @@
 ﻿using DesafioAda.DataAccess;
 using DesafioAda.Domain;
+using DesafioAda.Exceptions;
 using DesafioAda.Model;
 using FastEndpoints;
 
@@ -23,9 +24,18 @@ public class DeleteCard : Endpoint<CardByIdDto,IEnumerable<Card>>
     [EndpointName(nameof(DeleteCard))]
     public override async Task HandleAsync(CardByIdDto req, CancellationToken ct)
     {
-        var card = _repository.GetCard(req.Id);
-        _repository.DeleteCard(req.Id);
+        var card = await _repository.GetCard(req.Id);
+        try
+        {
+            await _repository.DeleteCard(req.Id);
+        }
+        catch(EntityNotFoundException)
+        {
+            await SendNotFoundAsync();
+            return;
+        }
+
         HttpContext.Response.Headers.Add("Deleted-Card-Title", card.Titulo);
-        await SendOkAsync(_repository.ListCards());
+        await SendOkAsync(await _repository.GetAllCards(), ct);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DesafioAda.DataAccess;
 using DesafioAda.Domain;
+using DesafioAda.Exceptions;
 using DesafioAda.Model;
 using DesafioAda.Processing;
 using FastEndpoints;
@@ -35,13 +36,23 @@ public class UpdateCard : Endpoint<UpdateCardDto, Card>
             await SendErrorsAsync(cancellation: ct);
             return;
         }
-        var card = _repository.UpdateCard(new Card
+        Card card = null;
+        try
         {
-            Id = req.Id,
-            Titulo = req.Titulo,
-            Conteudo = req.Conteudo,
-            Lista = req.Lista,
-        });
+            card = await _repository.UpdateCard(new Card
+            {
+                Id = req.Id,
+                Titulo = req.Titulo,
+                Conteudo = req.Conteudo,
+                Lista = req.Lista,
+            });
+        }
+        catch (EntityNotFoundException)
+        {
+            await SendNotFoundAsync();
+            return;
+        }
+
         await SendOkAsync(card, cancellation: ct);
     }
 }

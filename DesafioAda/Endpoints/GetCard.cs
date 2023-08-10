@@ -1,5 +1,6 @@
 ﻿using DesafioAda.DataAccess;
 using DesafioAda.Domain;
+using DesafioAda.Exceptions;
 using DesafioAda.Model;
 using FastEndpoints;
 
@@ -18,7 +19,7 @@ public class GetCard : Endpoint<CardByIdDto,Card>
     [EndpointName(nameof(GetCard))]
     public override async Task HandleAsync(CardByIdDto dto, CancellationToken ct)
     {
-        Card card = _cardRepository.GetCard(dto.Id);
+        Card card = await _cardRepository.GetCard(dto.Id);
         await SendOkAsync(card, ct);
     }
 }
